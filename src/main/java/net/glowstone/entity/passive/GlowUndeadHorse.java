@@ -6,6 +6,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.Inventory;
 
 public class GlowUndeadHorse extends GlowAbstractHorse implements AbstractHorse {
+
     public GlowUndeadHorse(Location location, EntityType type, double maxHealth) {
         super(location, type, maxHealth);
     }
@@ -13,5 +14,10 @@ public class GlowUndeadHorse extends GlowAbstractHorse implements AbstractHorse 
     @Override
     public Inventory getInventory() {
         return null;
+    }
+
+    @Override
+    public boolean isUndead() {
+        return true;
     }
 }

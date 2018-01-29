@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import net.glowstone.block.GlowBlock;
+import net.glowstone.chunk.GlowChunk;
 import net.glowstone.chunk.GlowChunk.Key;
 import net.glowstone.entity.GlowPlayer;
 import net.glowstone.entity.objects.GlowPainting;
@@ -24,8 +25,7 @@ import org.bukkit.util.Vector;
 public class ItemPainting extends ItemType {
 
     /**
-     * Contains all Arts
-     * Key is the size of the art in descending order
+     * Contains all Arts. Key is the size of the art in descending order.
      */
     private static final ListMultimap<Key, Art> ART_BY_SIZE;
 
@@ -33,15 +33,17 @@ public class ItemPainting extends ItemType {
         ART_BY_SIZE = MultimapBuilder.treeKeys(
             reverseOrder(
                 comparingInt(Key::getX)
-                .thenComparingInt(Key::getZ)
+                    .thenComparingInt(Key::getZ)
             )
         ).arrayListValues().build();
 
-        Arrays.stream(Art.values()).forEach(art -> ART_BY_SIZE.put(new Key(art.getBlockHeight(), art.getBlockWidth()), art));
+        Arrays.stream(Art.values()).forEach(art -> ART_BY_SIZE
+            .put(GlowChunk.Key.of(art.getBlockHeight(), art.getBlockWidth()), art));
     }
 
     @Override
-    public void rightClickBlock(GlowPlayer player, GlowBlock target, BlockFace face, ItemStack holding, Vector clickedLoc, EquipmentSlot hand) {
+    public void rightClickBlock(GlowPlayer player, GlowBlock target, BlockFace face,
+        ItemStack holding, Vector clickedLoc, EquipmentSlot hand) {
         Location center = target.getRelative(face).getLocation();
         GlowPainting painting = new GlowPainting(center, face);
 

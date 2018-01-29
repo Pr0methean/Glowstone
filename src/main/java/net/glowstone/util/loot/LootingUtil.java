@@ -1,17 +1,13 @@
 package net.glowstone.util.loot;
 
+import java.util.Objects;
+import java.util.concurrent.ThreadLocalRandom;
 import net.glowstone.entity.GlowLivingEntity;
 import net.glowstone.util.ReflectionProcessor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 
-import java.util.Objects;
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
-
 public class LootingUtil {
-
-    public static final Random random = ThreadLocalRandom.current();
 
     public static boolean is(Object a, Object b) {
         return Objects.equals(a, b);
@@ -33,6 +29,13 @@ public class LootingUtil {
         return !is(a, b);
     }
 
+    /**
+     * Evaluates a condition for an entity.
+     *
+     * @param entity the entity
+     * @param condition the condition string to evaluate
+     * @return true if the condition is satisfied; false otherwise
+     */
     public static boolean conditionValue(GlowLivingEntity entity, String condition) {
         if (condition.equals("ENTITY_ONFIRE")) {
             return entity.getFireTicks() > 0;
@@ -53,6 +56,6 @@ public class LootingUtil {
     }
 
     public static long randomFishType() {
-        return random.nextInt(4);
+        return ThreadLocalRandom.current().nextInt(4);
     }
 }
