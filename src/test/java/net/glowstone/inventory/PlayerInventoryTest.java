@@ -2,6 +2,7 @@ package net.glowstone.inventory;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import net.glowstone.testutils.ServerShim;
 import net.glowstone.util.IsFloatCloseTo;
@@ -40,14 +41,14 @@ public class PlayerInventoryTest {
         inventory = new GlowPlayerInventory(null);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void testBasics() {
         assertThat("Inventory was wrong size", inventory.getSize(), is(SIZE));
         assertThat("Contents were wrong size", inventory.getContents().length, is(SIZE));
         assertThat("Type was wrong", inventory.getType(), is(InventoryType.PLAYER));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void testSlotTypes() {
         for (int i = 0; i < 9; ++i) {
             assertThat("Slot type for " + i + " was wrong", inventory.getSlotType(i),
@@ -76,13 +77,13 @@ public class PlayerInventoryTest {
         assertThat("Mismatch in helmet slot", inventory.getHelmet(), is(TEST_HELMET));
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void testSetArmorContents() {
         inventory.setArmorContents(TEST_ARMOR);
         checkArmorContents();
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void testSetArmorSlots() {
         inventory.setBoots(TEST_BOOTS);
         inventory.setLeggings(TEST_LEGGINGS);
@@ -91,7 +92,7 @@ public class PlayerInventoryTest {
         checkArmorContents();
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     public void testDropChance() {
         assertThat("Wrong boots drop chance", inventory.getBootsDropChance(),
             IsFloatCloseTo.closeTo(1f, 0.001f));
@@ -103,9 +104,10 @@ public class PlayerInventoryTest {
             IsFloatCloseTo.closeTo(1f, 0.001f));
     }
 
-    @org.junit.jupiter.api.Test(expected = UnsupportedOperationException.class)
+    @Test
     public void testSetDropChance() {
-        inventory.setChestplateDropChance(0.5f);
+        assertThrows(UnsupportedOperationException.class,
+                () -> inventory.setChestplateDropChance(0.5f));
     }
 
 }

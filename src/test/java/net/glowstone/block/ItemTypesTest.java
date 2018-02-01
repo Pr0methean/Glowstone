@@ -3,7 +3,7 @@ package net.glowstone.block;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.Collection;
 import net.glowstone.block.blocktype.BlockType;
@@ -11,7 +11,7 @@ import net.glowstone.block.itemtype.ItemType;
 import net.glowstone.testutils.ParameterUtils;
 import org.bukkit.Material;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -38,7 +38,7 @@ public class ItemTypesTest {
         return ParameterUtils.enumCases(Material.values());
     }
 
-    @org.junit.jupiter.api.Test
+    @ParameterizedTest
     public void hasAllMaterials() {
         ItemType type = table.getItem(material);
 
