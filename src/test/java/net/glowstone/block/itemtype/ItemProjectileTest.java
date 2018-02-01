@@ -10,7 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.inventory.ItemStack;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 /**
@@ -26,7 +26,7 @@ public abstract class ItemProjectileTest<T extends Projectile> extends ItemTypeT
     protected final Class<T> projectileClass;
 
     @SuppressWarnings("unchecked")
-    @Test
+    @org.junit.jupiter.api.Test
     public void testUse() {
         ItemStack itemStack = new ItemStack(type, 1);
         inventory.addItem(itemStack);

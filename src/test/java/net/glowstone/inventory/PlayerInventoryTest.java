@@ -9,9 +9,9 @@ import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.inventory.InventoryType.SlotType;
 import org.bukkit.inventory.ItemStack;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for GlowPlayerInventory.
@@ -30,24 +30,24 @@ public class PlayerInventoryTest {
 
     private GlowPlayerInventory inventory;
 
-    @BeforeClass
+    @BeforeAll
     public static void initShim() {
         ServerShim.install();
     }
 
-    @Before
+    @BeforeEach
     public void setup() {
         inventory = new GlowPlayerInventory(null);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testBasics() {
         assertThat("Inventory was wrong size", inventory.getSize(), is(SIZE));
         assertThat("Contents were wrong size", inventory.getContents().length, is(SIZE));
         assertThat("Type was wrong", inventory.getType(), is(InventoryType.PLAYER));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSlotTypes() {
         for (int i = 0; i < 9; ++i) {
             assertThat("Slot type for " + i + " was wrong", inventory.getSlotType(i),
@@ -76,13 +76,13 @@ public class PlayerInventoryTest {
         assertThat("Mismatch in helmet slot", inventory.getHelmet(), is(TEST_HELMET));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSetArmorContents() {
         inventory.setArmorContents(TEST_ARMOR);
         checkArmorContents();
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testSetArmorSlots() {
         inventory.setBoots(TEST_BOOTS);
         inventory.setLeggings(TEST_LEGGINGS);
@@ -91,7 +91,7 @@ public class PlayerInventoryTest {
         checkArmorContents();
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testDropChance() {
         assertThat("Wrong boots drop chance", inventory.getBootsDropChance(),
             IsFloatCloseTo.closeTo(1f, 0.001f));
@@ -103,7 +103,7 @@ public class PlayerInventoryTest {
             IsFloatCloseTo.closeTo(1f, 0.001f));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @org.junit.jupiter.api.Test(expected = UnsupportedOperationException.class)
     public void testSetDropChance() {
         inventory.setChestplateDropChance(0.5f);
     }

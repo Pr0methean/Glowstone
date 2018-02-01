@@ -4,7 +4,7 @@ import static org.junit.Assert.fail;
 
 import java.util.HashMap;
 import net.glowstone.entity.meta.MetadataIndex;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link MetadataIndex}.
@@ -14,7 +14,7 @@ public class MetadataIndexTest {
     /**
      * Tests that more specific metadata always appears later.
      */
-    @Test
+    @org.junit.jupiter.api.Test
     public void testOrdering() {
         HashMap<Class<?>, MetadataIndex> seen = new HashMap<>();
 
@@ -39,7 +39,7 @@ public class MetadataIndexTest {
     /**
      * Tests that no two MetadataIndex entries can overlap on a single entity. Will not catch failure for entities without any metadata keys defined.
      */
-    @Test
+    @org.junit.jupiter.api.Test
     public void testNoOverlap() {
         HashMap<Class<?>, HashMap<Integer, MetadataIndex>> map = new HashMap<>();
 

@@ -8,8 +8,9 @@ import org.bukkit.Material;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
 
 /**
  * An attempt at test casing the ridiculously complicated window click logic.
@@ -251,7 +252,7 @@ public class WindowClickLogicTest {
         {"WINDOW_BORDER_RIGHT", "-1", "RAILS x 63", "null", "NOTHING"},
     };
 
-    @BeforeClass
+    @BeforeAll
     public static void initShim() {
         ServerShim.install();
     }
@@ -272,7 +273,7 @@ public class WindowClickLogicTest {
 
     // slot numbers are normalized: slot > 0 is 0 instead
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testAction() {
         for (String[] testCase : actionMap) {
             ClickType clickType = ClickType.valueOf(testCase[0]);

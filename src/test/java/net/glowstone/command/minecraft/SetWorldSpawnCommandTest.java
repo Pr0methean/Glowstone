@@ -14,8 +14,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
@@ -32,7 +32,7 @@ public class SetWorldSpawnCommandTest {
 
     private Command command;
 
-    @Before
+    @BeforeEach
     public void before() {
         sender = PowerMockito.mock(CommandSender.class);
         opSender = PowerMockito.mock(CommandSender.class);
@@ -60,7 +60,7 @@ public class SetWorldSpawnCommandTest {
             + "I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error."));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteFailsWithoutWorld() {
         PowerMockito.stub(PowerMockito.method(CommandUtils.class, "getWorld", CommandSender.class))
             .toReturn(null);
@@ -68,7 +68,7 @@ public class SetWorldSpawnCommandTest {
         assertThat(command.execute(sender, "label", new String[0]), is(false));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteFailsWithOneParameter() {
         assertThat(command.execute(opSender, "label", new String[1]), is(false));
         Mockito.verify(opSender)
@@ -82,7 +82,7 @@ public class SetWorldSpawnCommandTest {
             .sendMessage(eq(ChatColor.RED + "Usage: /setworldspawn OR /setworldspawn <x> <y> <z>"));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteFailsWithDefaultLocation() {
         assertThat(command.execute(opSender, "label", new String[0]), is(false));
         Mockito.verify(opSender).sendMessage(
@@ -90,21 +90,21 @@ public class SetWorldSpawnCommandTest {
         ;
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteFailsWithRelativeLocation() {
         assertThat(command.execute(opSender, "label", new String[]{"~2", "3", "4"}), is(false));
         Mockito.verify(opSender).sendMessage(
             eq(ChatColor.RED + "Relative coordinates can not be used without a physical user."));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteFailsWithYCoordinatesTooHigh() {
         assertThat(command.execute(opSender, "label", new String[]{"2", "10000", "4"}), is(false));
         Mockito.verify(opSender).sendMessage(
             eq(ChatColor.RED + "'10000' is too high for the current world. Max value is '50'."));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteFailsWithYCoordinatesTooSmall() {
         assertThat(command.execute(opSender, "label", new String[]{"2", "-10000", "4"}), is(false));
         // -10001 because of the floor, it's not supposed to be negative
@@ -112,7 +112,7 @@ public class SetWorldSpawnCommandTest {
             eq(ChatColor.RED + "The y coordinate (-10000) is too small, it must be at least 0."));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteSucceedsWithCurrentLocation() {
         assertThat(command.execute(opPlayer, "label", new String[0]), is(true));
         Mockito.verify(world).setSpawnLocation(10, 20, 30);

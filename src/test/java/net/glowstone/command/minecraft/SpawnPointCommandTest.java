@@ -17,8 +17,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
@@ -39,7 +39,7 @@ public class SpawnPointCommandTest {
 
     private GlowServer server;
 
-    @Before
+    @BeforeEach
     public void before() {
         server = PowerMockito.mock(GlowServer.class);
 
@@ -87,21 +87,21 @@ public class SpawnPointCommandTest {
             .toReturn(world);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteFailsWithoutPermission() {
         assertThat(command.execute(sender, "label", new String[0]), is(false));
         Mockito.verify(sender).sendMessage(eq(ChatColor.RED
             + "I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error."));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteFailsWithTwoParameters() {
         assertThat(command.execute(opSender, "label", new String[2]), is(false));
         Mockito.verify(opSender).sendMessage(eq(ChatColor.RED
             + "Usage: /spawnpoint OR /spawnpoint <player> OR /spawnpoint <player> <x> <y> <z>"));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteFailsWithThreeParameters() {
         assertThat(command.execute(opSender, "label", new String[3]), is(false));
         Mockito.verify(opSender).sendMessage(eq(ChatColor.RED
@@ -115,20 +115,20 @@ public class SpawnPointCommandTest {
             + "You must specify which player you wish to perform this action on."));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteFailsUnknownTarget() {
         assertThat(command.execute(opSender, "label", new String[]{"player"}), is(false));
         Mockito.verify(opSender).sendMessage(eq(ChatColor.RED + "Player 'player' cannot be found"));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteFailsWithDefaultLocation() {
         assertThat(command.execute(opSender, "label", new String[]{"player1"}), is(false));
         Mockito.verify(opSender).sendMessage(
             eq(ChatColor.RED + "Default coordinates can not be used without a physical user."));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteFailsWithRelativeLocation() {
         assertThat(command.execute(opSender, "label", new String[]{"player1", "~2", "3", "4"}),
             is(false));
@@ -136,7 +136,7 @@ public class SpawnPointCommandTest {
             eq(ChatColor.RED + "Relative coordinates can not be used without a physical user."));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteFailsWithYCoordinatesTooHigh() {
         assertThat(command.execute(opSender, "label", new String[]{"player1", "2", "10000", "4"}),
             is(false));
@@ -144,7 +144,7 @@ public class SpawnPointCommandTest {
             eq(ChatColor.RED + "'10000.0' is too high for the current world. Max value is '50'."));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteFailsWithYCoordinatesTooSmall() {
         assertThat(command.execute(opSender, "label", new String[]{"player1", "2", "-10000", "4"}),
             is(false));
@@ -152,7 +152,7 @@ public class SpawnPointCommandTest {
             eq(ChatColor.RED + "The y coordinate (-10000.0) is too small, it must be at least 0."));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteSucceedsWithCurrentLocation() {
         assertThat(command.execute(opPlayer, "label", new String[0]), is(true));
         Mockito.verify((Player) opPlayer)
@@ -174,7 +174,7 @@ public class SpawnPointCommandTest {
             .setBedSpawnLocation(new Location(world, 30.5, 20.0, 10.5), true);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteSucceedsAllPlayersWithCurrentLocation() {
         assertThat(command.execute(opPlayer, "label", new String[]{"@a"}), is(true));
         Mockito.verify(Bukkit.getPlayerExact("player1"))
@@ -185,7 +185,7 @@ public class SpawnPointCommandTest {
             .setBedSpawnLocation(new Location(world, 10.5, 20.0, 30.5), true);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteSucceedsAllPlayersWithSpecificLocation() {
         assertThat(command.execute(opPlayer, "label", new String[]{"@a", "30", "20", "10"}),
             is(true));
@@ -197,7 +197,7 @@ public class SpawnPointCommandTest {
             .setBedSpawnLocation(new Location(world, 30.5, 20.0, 10.5), true);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteSucceedsAllPlayersWithRelativeLocation() {
         assertThat(command.execute(opPlayer, "label", new String[]{"@a", "30", "~20", "10"}),
             is(true));

@@ -10,8 +10,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.Server;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
@@ -26,7 +27,7 @@ public class SetIdleTimeoutCommandTest {
 
     private Command command;
 
-    @Before
+    @BeforeEach
     public void before() {
         PowerMockito.mockStatic(Bukkit.class);
 
@@ -47,7 +48,7 @@ public class SetIdleTimeoutCommandTest {
             + "I'm sorry, but you do not have permission to perform this command. Please contact the server administrators if you believe that this is in error."));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteFailsWithoutParameters() {
         final boolean commandResult = command.execute(opSender, "label", new String[0]);
 
@@ -56,7 +57,7 @@ public class SetIdleTimeoutCommandTest {
             .sendMessage(eq(ChatColor.RED + "Usage: /setidletimeout <Minutes until kick>"));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteFailsWithIncorrectNumber() {
         final boolean commandResult = command
             .execute(opSender, "label", new String[]{"invalidNumber"});
@@ -66,7 +67,7 @@ public class SetIdleTimeoutCommandTest {
             .sendMessage(eq(ChatColor.RED + "'invalidNumber' is not a valid number"));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteFailsWithNegativeTimeout() {
         final boolean commandResult = command.execute(opSender, "label", new String[]{"-42"});
 
@@ -75,7 +76,7 @@ public class SetIdleTimeoutCommandTest {
             + "The number you have entered (-42) is too small, it must be at least 1"));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteFailsWithNullTimeout() {
         final boolean commandResult = command.execute(opSender, "label", new String[]{"0"});
 
@@ -84,7 +85,7 @@ public class SetIdleTimeoutCommandTest {
             + "The number you have entered (0) is too small, it must be at least 1"));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteSucceeds() {
         final boolean commandResult = command.execute(opSender, "label", new String[]{"50"});
 
@@ -94,7 +95,7 @@ public class SetIdleTimeoutCommandTest {
         Mockito.verify(Bukkit.getServer()).setIdleTimeout(50);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testTabComplete() {
         assertThat(command.tabComplete(null, null, null), is(Collections.emptyList()));
         assertThat(command.tabComplete(sender, "", new String[0]), is(Collections.emptyList()));

@@ -9,7 +9,7 @@ import com.google.common.collect.ImmutableList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link SuperSet}.
@@ -53,7 +53,7 @@ public class SuperSetTest {
         }
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void containsTest() {
         Set<String> sets = generateTestSet();
 
@@ -61,7 +61,7 @@ public class SuperSetTest {
         checkContains(sets, "B");
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void sizeTest() {
         Set<String> sets = generateTestSet();
         assertThat("Populated set size test failed", CASES << 1, is(sets.size()));

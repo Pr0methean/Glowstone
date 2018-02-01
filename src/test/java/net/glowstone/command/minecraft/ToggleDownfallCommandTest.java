@@ -10,8 +10,8 @@ import net.glowstone.command.CommandUtils;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
@@ -28,7 +28,7 @@ public class ToggleDownfallCommandTest {
 
     private CommandSender sender, opSender;
 
-    @Before
+    @BeforeEach
     public void before() {
         world = PowerMockito.mock(GlowWorld.class);
         command = new ToggleDownfallCommand();
@@ -45,7 +45,7 @@ public class ToggleDownfallCommandTest {
         assertThat(command.execute(sender, "label", new String[0]), is(false));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteSetRain() {
         PowerMockito.when(world.hasStorm()).thenReturn(true);
 
@@ -63,7 +63,7 @@ public class ToggleDownfallCommandTest {
         Mockito.verify(world).setThundering(eq(true));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testTabComplete() {
         assertThat(command.tabComplete(opSender, "alias", new String[0]),
             is(Collections.emptyList()));

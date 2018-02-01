@@ -7,7 +7,7 @@ import com.google.common.collect.ImmutableList;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link SuperList}, {@link SuperIterator} and {@link SuperListIterator}.
@@ -36,7 +36,7 @@ public class SuperListAndIteratorTest {
         return new SuperList<>(lists);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void sizeTest() {
         SuperList<Integer> list = generateTestList();
         assertThat("Parent count test failed", PARENT_COUNT, is(list.getParents().size()));
@@ -46,7 +46,7 @@ public class SuperListAndIteratorTest {
         assertThat("List couldn't be cleared", list.size(), is(0));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void iterationTest() {
         Iterator<Integer> it = generateTestList().iterator();
         for (int i = 0; i < PARENT_COUNT * ELEMENTS_PER_PARENT; i++) {
@@ -57,7 +57,7 @@ public class SuperListAndIteratorTest {
         assertThat("Iterator hasNext returns true after reaching the end", it.hasNext(), is(false));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void iteratorRemovalTest() {
         SuperList<Integer> list = generateTestList();
         Iterator<Integer> it = list.iterator();
@@ -69,7 +69,7 @@ public class SuperListAndIteratorTest {
         }
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void addTest() {
         List<Integer> parentList = new ArrayList<>();
         List<Integer> superList = new SuperList<>(ImmutableList.of(parentList));

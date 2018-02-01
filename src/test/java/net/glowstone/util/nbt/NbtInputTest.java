@@ -5,14 +5,14 @@ import static org.junit.Assert.assertThat;
 
 import java.io.IOException;
 import java.io.InputStream;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests for {@link NbtInputStream} and reading from {@link CompoundTag}s.
  */
 public class NbtInputTest {
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void helloWorld() throws IOException {
         InputStream raw = getClass().getResourceAsStream("/nbt/hello_world.nbt");
         assertThat("Failed to get test resource /nbt/hello_world.nbt", raw, notNullValue());
@@ -21,7 +21,7 @@ public class NbtInputTest {
         }
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void bigTest() throws IOException {
         InputStream raw = getClass().getResourceAsStream("/nbt/bigtest.nbt");
         assertThat("Failed to get test resource /nbt/bigtest.nbt", raw, notNullValue());

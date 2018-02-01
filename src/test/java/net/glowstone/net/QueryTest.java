@@ -29,9 +29,9 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
@@ -73,7 +73,7 @@ public class QueryTest {
     private InetSocketAddress address;
     private boolean queryPlugins;
 
-    @Before
+    @BeforeEach
     public void setup() throws Exception {
         glowServer = mock(GlowServer.class);
         CountDownLatch latch = new CountDownLatch(1);
@@ -85,12 +85,12 @@ public class QueryTest {
         address = InetSocketAddress.createUnresolved("somehost", 12345);
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         server.shutdown();
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testChallengeTokens() throws Exception {
         assertThat("Accepted random challenge token.", server.verifyChallengeToken(address, 54321),
             is(false));
@@ -112,14 +112,14 @@ public class QueryTest {
             is(false));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testHandshake() throws Exception {
         QueryHandler handler = new QueryHandler(server, queryPlugins);
         when(random.nextInt()).thenReturn(9513307);
         testChannelRead(handler, HANDSHAKE_RECV, HANDSHAKE_SEND);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     @SuppressWarnings({"unchecked", "rawtypes"})
     public void testBasicStats() throws Exception {
         World world = mock(World.class);
@@ -140,7 +140,7 @@ public class QueryTest {
         testChannelRead(handler, BASIC_STATS_RECV, BASIC_STATS_SEND);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testFullStats() throws Exception {
         World world = mock(World.class);
         when(world.getName()).thenReturn("world");

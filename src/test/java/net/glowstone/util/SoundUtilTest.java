@@ -5,11 +5,11 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 import org.bukkit.SoundCategory;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class SoundUtilTest {
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testBuildSoundCategory() {
         assertThat(SoundUtil.buildSoundCategory("master"), is(SoundCategory.MASTER));
         assertThat(SoundUtil.buildSoundCategory("MaStEr"), is(SoundCategory.MASTER));

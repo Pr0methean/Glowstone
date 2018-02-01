@@ -17,7 +17,7 @@ import net.glowstone.util.nbt.ShortTag;
 import net.glowstone.util.nbt.StringTag;
 import net.glowstone.util.nbt.Tag;
 import net.glowstone.util.nbt.TagType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -45,7 +45,7 @@ public class MojangsonWriteTest {
         );
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void canWriteTag() {
         CompoundTag top = new CompoundTag();
         top.getValue().put("value", testCase.getKey());

@@ -21,8 +21,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
@@ -43,7 +44,7 @@ public class PlaySoundCommandTest {
 
     private Command command;
 
-    @Before
+    @BeforeEach
     public void before() {
         command = new PlaySoundCommand();
         sender = PowerMockito.mock(CommandSender.class);
@@ -127,7 +128,7 @@ public class PlaySoundCommandTest {
             .sendMessage(eq(ChatColor.RED + "Minimum volume value (300) must be between 0 and 1"));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteFailsMinimumVolumeInvalid() {
         assertThat(command.execute(opSender, "label",
             new String[]{"minecraft:entity.parrot.imitate.wither", "master", "player1", "0", "0",
@@ -135,7 +136,7 @@ public class PlaySoundCommandTest {
         Mockito.verify(opSender).sendMessage(eq(ChatColor.RED + "'volume' is not a valid number"));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteFailsPitchOutOfRange() {
         assertThat(command.execute(opSender, "label",
             new String[]{"minecraft:entity.parrot.imitate.wither", "master", "player1", "0", "0",
@@ -152,7 +153,7 @@ public class PlaySoundCommandTest {
         Mockito.verify(opSender).sendMessage(eq(ChatColor.RED + "'pitch' is not a valid number"));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteFailsVolumeInvalid() {
         assertThat(command.execute(opSender, "label",
             new String[]{"minecraft:entity.parrot.imitate.wither", "master", "player1", "0", "0",
@@ -168,7 +169,7 @@ public class PlaySoundCommandTest {
         Mockito.verify(opSender).sendMessage(eq(ChatColor.RED + "The position (0,0,Y) is invalid"));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteFailsPlayerTooFarAway() {
         assertThat(command.execute(opSender, "label",
             new String[]{"minecraft:entity.parrot.imitate.wither", "master", "player1", "100000",
@@ -186,7 +187,7 @@ public class PlaySoundCommandTest {
                 SoundCategory.MASTER, 1, 1);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteSucceedsOnAnotherPlayerWithCurrentLocation() {
         assertThat(command.execute(opSender, "label",
             new String[]{"minecraft:entity.parrot.imitate.wither", "master", "player1"}), is(true));
@@ -195,7 +196,7 @@ public class PlaySoundCommandTest {
                 SoundCategory.MASTER, 1, 1);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteSucceedsOnAllPlayersWithCurrentLocation() {
         assertThat(command.execute(opPlayer, "label",
             new String[]{"minecraft:entity.parrot.imitate.wither", "master", "@a"}), is(true));
@@ -220,7 +221,7 @@ public class PlaySoundCommandTest {
                 SoundCategory.MASTER, 200, 1);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteSucceedsOnAllPlayersWithSpecificLocation() {
         assertThat(command.execute(opPlayer, "label",
             new String[]{"minecraft:entity.parrot.imitate.wither", "master", "@a", "0", "0", "0",
@@ -236,7 +237,7 @@ public class PlaySoundCommandTest {
                 SoundCategory.MASTER, 200, 1);
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testExecuteSucceedsOnAnotherPlayerWithRelativeLocation() {
         assertThat(command.execute(opSender, "label",
             new String[]{"minecraft:entity.parrot.imitate.wither", "master", "player1", "~20",
@@ -276,7 +277,7 @@ public class PlaySoundCommandTest {
                 eq(SoundCategory.MASTER), eq((float) 1), eq((float) 0.6));
     }
 
-    @Test
+    @org.junit.jupiter.api.Test
     public void testTabComplete() {
         assertThat(command.tabComplete(null, null, null), is(Collections.emptyList()));
         assertThat(command.tabComplete(opSender, "alias", new String[0]),
