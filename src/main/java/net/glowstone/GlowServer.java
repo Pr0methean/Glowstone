@@ -645,7 +645,7 @@ public final class GlowServer implements Server {
      */
     public void start() {
         // Determine console mode and start reading input
-        consoleManager.startConsole(config.getBoolean(Key.USE_JLINE));
+        consoleManager.startConsole();
         consoleManager.startFile(config.getString(Key.LOG_FILE));
 
         if (getProxySupport()) {
