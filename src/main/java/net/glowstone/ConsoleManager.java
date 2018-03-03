@@ -22,7 +22,6 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 import java.util.logging.StreamHandler;
-import jline.console.completer.Completer;
 import lombok.Getter;
 import net.md_5.bungee.api.chat.BaseComponent;
 import org.bukkit.ChatColor;
@@ -36,7 +35,6 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
-import org.fusesource.jansi.Ansi;
 
 /**
  * A meta-class to handle all logging and input-related console improvements. Portions are heavily
@@ -212,27 +210,6 @@ public final class ConsoleManager {
         public synchronized void flush() {
             checkRotate();
             super.flush();
-        }
-    }
-
-    private class CommandCompleter implements Completer {
-
-        @Override
-        public int complete(String buffer, int cursor, List<CharSequence> candidates) {
-            try {
-                List<String> completions = server.getScheduler()
-                        .syncIfNeeded(() -> server.getCommandMap().tabComplete(sender, buffer));
-                if (completions == null) {
-                    return cursor;  // no completions
-                }
-                candidates.addAll(completions);
-
-                // location to position the cursor at (before autofilling takes place)
-                return buffer.lastIndexOf(' ') + 1;
-            } catch (Throwable t) {
-                logger.log(Level.WARNING, "Error while tab completing", t);
-                return cursor;
-            }
         }
     }
 
