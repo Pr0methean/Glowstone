@@ -309,6 +309,11 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <parallel>methods</parallel>
+          <threadCount>1</threadCount>
+          <perCoreThreadCount>true</perCoreThreadCount>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.projectlombok</groupId>
