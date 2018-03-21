@@ -311,6 +311,7 @@
           </execution>
         </executions>
         <configuration>
+          <reuseForks>true</reuseForks>
           <forkCount>${junit.forkcount}</forkCount>
         </configuration>
       </plugin>
