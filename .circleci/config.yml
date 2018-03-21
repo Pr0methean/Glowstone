@@ -84,6 +84,9 @@ jobs:
             - store_artifacts:
                 path: target/glowstone-sources.jar
                 destination: glowstone-sources.jar
+
+            - store_artifacts:
+                path: target/coverage
 workflows:
     version: 2
 
