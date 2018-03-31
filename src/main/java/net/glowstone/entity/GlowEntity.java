@@ -217,7 +217,7 @@ public abstract class GlowEntity implements Entity {
      * A flag indicting if the entity is on the ground.
      */
     @Getter
-    private boolean onGround = true;
+    private volatile boolean onGround = true;
     /**
      * The distance the entity is currently falling without touching the ground.
      */
